@@ -1,5 +1,6 @@
 <template>
    <div>
+       <h4>User Balance...</h4>
        Current balance:{{normalizedBalance}}
     <button v-on:click="updateBalance">Update balance</button>
    </div>

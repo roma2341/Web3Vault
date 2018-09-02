@@ -1,6 +1,7 @@
 
 <template>
     <div>
+		<h4>Smart contract invoking component...</h4>
         <input type="text" v-model="contractValue">
 		<button v-on:click="setContractValue(contractValue)">Set</button>
 		<button v-on:click="getContractValue()">Get</button>

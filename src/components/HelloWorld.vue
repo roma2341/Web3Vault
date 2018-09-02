@@ -3,6 +3,7 @@
     <p>account:{{account}}</p>
     <EthereumBalance></EthereumBalance>
     <SmartContractComponent></SmartContractComponent>
+    <TransactionComponent></TransactionComponent>
   </div>
 </template>
 
@@ -12,6 +13,7 @@
   } from 'vuex';
   import EthereumBalance from './balance/EthereumBalance';
   import SmartContractComponent from './contract/SmartContractComponent';
+  import TransactionComponent from './transaction/TransactionComponent';
   export default {
     name: 'HelloWorld',
     /*props: {
@@ -19,7 +21,8 @@
     },*/
     components: {
       EthereumBalance,
-      SmartContractComponent
+      SmartContractComponent,
+      TransactionComponent
     },
     computed: mapState({
       account: 'account'
