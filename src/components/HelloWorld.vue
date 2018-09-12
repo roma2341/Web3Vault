@@ -4,6 +4,7 @@
     <EthereumBalance></EthereumBalance>
     <SmartContractComponent></SmartContractComponent>
     <TransactionComponent></TransactionComponent>
+    <IcoContractComponent></IcoContractComponent>
   </div>
 </template>
 
@@ -13,6 +14,7 @@
   } from 'vuex';
   import EthereumBalance from './balance/EthereumBalance';
   import SmartContractComponent from './contract/SmartContractComponent';
+  import IcoContractComponent from './contract/IcoContractComponent';
   import TransactionComponent from './transaction/TransactionComponent';
   export default {
     name: 'HelloWorld',
@@ -22,7 +24,9 @@
     components: {
       EthereumBalance,
       SmartContractComponent,
+      IcoContractComponent,
       TransactionComponent
+
     },
     computed: mapState({
       account: 'account'
