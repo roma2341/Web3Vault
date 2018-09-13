@@ -1,11 +1,18 @@
 <template>
     <div>
-        <p>ICO Contact component:</p>
-
+        <h4>ICO Contact component:</h4>
+        <span>result:{{resultValue}}</span>
+        <button v-on:click="getWinningProposal()">Get winning proposal</button>
+        <input type="text" v-model="contractValue">
+        <button v-on:click="setDelegate()">delegate</button>
+        <button v-on:click="setGiveRightToVote()">giveRightToVote</button>
+        <button v-on:click="setVote()">vote</button>
     </div>
 </template>
 
 <script>
+import {mapState} from 'vuex';
+
 const  CONTRACT_ADDRESS = '0xecc04e09a36fc5cd4bb4684a99ed3be420079974';
 const ABI = [
 	{
@@ -81,14 +88,69 @@ export default {
     name:'IcoContractComponent',
     data: function () {
         return {
-            contractValue: 0
+            resultValue: 0,
+            contractValue: ''
         }
     },
-    computed: {
-
-    },
+    computed:mapState({
+      account: 'account'
+    }),
     methods: {
-
+          getWinningProposal(){
+			let self = this;
+            let myAbi = web3.eth.contract(ABI);
+            let myfunction = myAbi.at(CONTRACT_ADDRESS);
+            //call the get function of our SimpleStorage contract
+            myfunction.winningProposal.call(function (err, xname) {
+                if (err) { console.log(err) }
+                if (xname) {
+                    //display value on the webpage
+                    self.resultValue = xname;
+                }
+            });
+        },
+        setDelegate(){
+            let val = this.contractValue;
+            let self = this;
+            var myAbi = web3.eth.contract(ABI);
+            var myfunction = myAbi.at(CONTRACT_ADDRESS);
+            //call the get function of our SimpleStorage contract
+            myfunction.delegate.sendTransaction(val, { from: this.account, gas: 4000000 }, function (error, result) {
+            if (!error) {
+                console.log(result);
+            } else {
+                console.log(error);
+            }
+			});
+        },
+        setGiveRightToVote(){
+            let val = this.contractValue;
+            let self = this;
+            var myAbi = web3.eth.contract(ABI);
+            var myfunction = myAbi.at(CONTRACT_ADDRESS);
+            //call the get function of our SimpleStorage contract
+            myfunction.giveRightToVote.sendTransaction(val, { from: this.account, gas: 4000000 }, function (error, result) {
+            if (!error) {
+                console.log(result);
+            } else {
+                console.log(error);
+            }
+			});
+        },
+        setVote(){
+            let val = this.contractValue;
+            let self = this;
+            var myAbi = web3.eth.contract(ABI);
+            var myfunction = myAbi.at(CONTRACT_ADDRESS);
+            //call the get function of our SimpleStorage contract
+            myfunction.vote.sendTransaction(val, { from: this.account, gas: 4000000 }, function (error, result) {
+            if (!error) {
+                console.log(result);
+            } else {
+                console.log(error);
+            }
+			});
+        }
     }
 }
 </script>
